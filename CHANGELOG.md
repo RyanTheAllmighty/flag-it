@@ -1,9 +1,10 @@
-# Change Log
+# Changelog for Flag It
 
-All notable changes to the "flag-it" extension will be documented in this file.
+## 0.1.0
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+Initial release of Flag It with the following features:
 
-## [Unreleased]
-
-- Initial release
+- File flagging with comments
+- Folder organization
+- Drag and drop support
+- Context menu integration

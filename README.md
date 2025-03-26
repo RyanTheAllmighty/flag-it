@@ -1,71 +1,42 @@
-# flag-it README
+# Flag It
 
 A VSCode extension to flag/bookmark files with comments for easy access
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- **Flag Any File**: Quickly flag files for easy access later through:
 
-For example if there is an image subfolder under your extension project workspace:
+    - Right-clicking a file in the Explorer
+    - Right-clicking an editor tab
+    - Using the Command Palette
+    - Clicking "Flag Current File" in the Flag It sidebar
 
-\!\[feature X\]\(images/feature-x.png\)
+- **Organize with Comments**: Add optional comments to your flagged files to remember why they're important
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Folder Organization**: Create folders to organize your flagged files
+
+    - Drag and drop files between folders
+    - Rename folders as needed
+    - Nested folder support
+
+- **Easy Access**:
+
+    - Dedicated sidebar view for all flagged files
+    - Click any flagged file to open it
+    - Edit comments directly from the sidebar
+    - Remove flags with one click
+
+## Usage
+
+1. Flag a file using any of the methods mentioned above
+2. Optionally add a comment to remember why you flagged it
+3. Create folders in the Flag It sidebar to organize your flagged files
+4. Access your flagged files anytime from the Flag It sidebar
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- VS Code version 1.56.0 or higher
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+None reported yet. If you encounter any issues, please report them on our GitHub repository.

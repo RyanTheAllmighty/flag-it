@@ -2,16 +2,28 @@
     "name": "flag-it",
     "displayName": "Flag It",
     "description": "A VSCode extension to flag/bookmark files with comments for easy access",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "engines": {
         "vscode": "^1.56.0",
         "node": ">=20",
         "pnpm": "10.6.5"
     },
+    "icon": "resources/icon.png",
+    "publisher": "RyanDowling",
+    "repository": "https://github.com/RyanTheAllmighty/flag-it",
     "packageManager": "pnpm@10.6.5",
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "flag",
+        "bookmark",
+        "comment",
+        "save"
+    ],
+    "sponsor": {
+        "url": "https://github.com/sponsors/RyanTheAllmighty"
+    },
     "activationEvents": [],
     "main": "./dist/extension.js",
     "contributes": {
@@ -176,6 +188,7 @@
         "prepare": "husky",
         "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
         "prettier": "prettier",
+        "publish": "pnpm vsce publish --no-dependencies",
         "test": "vscode-test",
         "vscode:prepublish": "pnpm run package",
         "watch": "npm-run-all -p watch:*",
