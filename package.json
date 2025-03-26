@@ -4,7 +4,7 @@
     "description": "A VSCode extension to flag/bookmark files with comments for easy access",
     "version": "0.0.1",
     "engines": {
-        "vscode": "^1.98.0",
+        "vscode": "^1.56.0",
         "node": ">=20",
         "pnpm": "10.6.5"
     },
@@ -17,10 +17,145 @@
     "contributes": {
         "commands": [
             {
-                "command": "flag-it.helloWorld",
-                "title": "Hello World"
+                "command": "flag-it.flagFile",
+                "title": "Flag File"
+            },
+            {
+                "command": "flag-it.removeFlagFromFile",
+                "title": "Remove Flag",
+                "icon": "resources/trash.svg"
+            },
+            {
+                "command": "flag-it.editComment",
+                "title": "Edit Comment",
+                "icon": "resources/edit.svg"
+            },
+            {
+                "command": "flag-it.clearAllFlags",
+                "title": "Clear All Flags"
+            },
+            {
+                "command": "flag-it.openFlaggedFile",
+                "title": "Open File"
+            },
+            {
+                "command": "flag-it.createFolder",
+                "title": "Create Folder",
+                "icon": "resources/create_folder.svg"
+            },
+            {
+                "command": "flag-it.deleteFolder",
+                "title": "Delete Folder",
+                "icon": "resources/trash.svg"
+            },
+            {
+                "command": "flag-it.renameFolder",
+                "title": "Rename Folder",
+                "icon": "resources/edit.svg"
             }
-        ]
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "flag-it.flagFile",
+                    "group": "navigation",
+                    "icon": "$(flag)"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "flag-it.flagFile",
+                    "group": "navigation",
+                    "icon": "$(flag)"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "flag-it.editComment",
+                    "when": "view == flaggedFiles && viewItem == flaggedFile",
+                    "group": "inline"
+                },
+                {
+                    "command": "flag-it.removeFlagFromFile",
+                    "when": "view == flaggedFiles && viewItem == flaggedFile",
+                    "group": "inline"
+                },
+                {
+                    "command": "flag-it.editComment",
+                    "when": "view == flaggedFiles && viewItem == flaggedFile"
+                },
+                {
+                    "command": "flag-it.removeFlagFromFile",
+                    "when": "view == flaggedFiles && viewItem == flaggedFile"
+                },
+                {
+                    "command": "flag-it.renameFolder",
+                    "when": "view == flaggedFiles && viewItem == flagFolder",
+                    "group": "inline"
+                },
+                {
+                    "command": "flag-it.deleteFolder",
+                    "when": "view == flaggedFiles && viewItem == flagFolder",
+                    "group": "inline"
+                },
+                {
+                    "command": "flag-it.renameFolder",
+                    "when": "view == flaggedFiles && viewItem == flagFolder"
+                },
+                {
+                    "command": "flag-it.createFolder",
+                    "when": "view == flaggedFiles && viewItem == flagFolder"
+                },
+                {
+                    "command": "flag-it.deleteFolder",
+                    "when": "view == flaggedFiles && viewItem == flagFolder"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "flag-it.createFolder",
+                    "when": "view == flaggedFiles",
+                    "group": "navigation",
+                    "icon": "$(new-folder)"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "flag-it-sidebar",
+                    "title": "Flag It",
+                    "icon": "resources/flag.svg"
+                }
+            ]
+        },
+        "views": {
+            "flag-it-sidebar": [
+                {
+                    "id": "flaggedFiles",
+                    "name": "Flagged Files",
+                    "type": "tree",
+                    "order": 1
+                }
+            ]
+        },
+        "viewsWelcome": [
+            {
+                "view": "flaggedFiles",
+                "contents": "No files flagged yet.\n\nFlag files to quickly access them later with optional comments.\n\n[Flag Current File](command:flag-it.flagFile)\n\nYou can flag files by:\n- Right-clicking a file in Explorer\n- Right-clicking an editor tab\n- Using the Command Palette (Ctrl+Shift+P)",
+                "when": "!flag-it:hasFlaggedFiles"
+            }
+        ],
+        "configuration": {
+            "title": "Flag It",
+            "properties": {
+                "flag-it.externalFilesSectionOrder": {
+                    "type": "number",
+                    "default": 1000,
+                    "description": "Order of the external files section. Higher values move the section down."
+                }
+            }
+        }
     },
     "lint-staged": {
         "*.json": [
@@ -54,7 +189,7 @@
         "@eslint/js": "^9.23.0",
         "@types/mocha": "^10.0.10",
         "@types/node": "22.x",
-        "@types/vscode": "^1.98.0",
+        "@types/vscode": "^1.56.0",
         "@typescript-eslint/eslint-plugin": "^8.28.0",
         "@typescript-eslint/parser": "^8.28.0",
         "@vscode/test-cli": "^0.0.10",
