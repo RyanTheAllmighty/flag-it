@@ -30,17 +30,18 @@
         "commands": [
             {
                 "command": "flag-it.flagFile",
-                "title": "Flag File"
+                "title": "Flag File",
+                "icon": "$(edit)"
             },
             {
                 "command": "flag-it.removeFlagFromFile",
                 "title": "Remove Flag",
-                "icon": "resources/trash.svg"
+                "icon": "$(trash)"
             },
             {
                 "command": "flag-it.editComment",
                 "title": "Edit Comment",
-                "icon": "resources/edit.svg"
+                "icon": "$(edit)"
             },
             {
                 "command": "flag-it.clearAllFlags",
@@ -53,32 +54,30 @@
             {
                 "command": "flag-it.createFolder",
                 "title": "Create Folder",
-                "icon": "resources/create_folder.svg"
+                "icon": "$(new-folder)"
             },
             {
                 "command": "flag-it.deleteFolder",
                 "title": "Delete Folder",
-                "icon": "resources/trash.svg"
+                "icon": "$(trash)"
             },
             {
                 "command": "flag-it.renameFolder",
                 "title": "Rename Folder",
-                "icon": "resources/edit.svg"
+                "icon": "$(edit)"
             }
         ],
         "menus": {
             "explorer/context": [
                 {
                     "command": "flag-it.flagFile",
-                    "group": "navigation",
-                    "icon": "$(flag)"
+                    "group": "navigation"
                 }
             ],
             "editor/title/context": [
                 {
                     "command": "flag-it.flagFile",
-                    "group": "navigation",
-                    "icon": "$(flag)"
+                    "group": "navigation"
                 }
             ],
             "view/item/context": [
@@ -127,8 +126,7 @@
                 {
                     "command": "flag-it.createFolder",
                     "when": "view == flaggedFiles",
-                    "group": "navigation",
-                    "icon": "$(new-folder)"
+                    "group": "navigation"
                 }
             ]
         },
