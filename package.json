@@ -152,7 +152,7 @@
         "viewsWelcome": [
             {
                 "view": "flaggedFiles",
-                "contents": "No files flagged yet.\n\nFlag files to quickly access them later with optional comments.\n\n[Flag Current File](command:flag-it.flagFile)\n\nYou can flag files by:\n- Right-clicking a file in Explorer\n- Right-clicking an editor tab\n- Using the Command Palette (Ctrl+Shift+P)",
+                "contents": "No files flagged yet.\n\nFlag files to quickly access them later with optional comments.\n\n[Flag Current File](command:flag-it.flagFile)\n\nYou can flag files by:\n- Right-clicking a file in Explorer\n- Right-clicking an editor tab\n- Dragging an editor tab into this sidebar\n- Using the Command Palette (Ctrl+Shift+P)",
                 "when": "!flag-it:hasFlaggedFiles"
             }
         ],

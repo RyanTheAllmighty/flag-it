@@ -40,7 +40,7 @@ class FlaggedFilesProvider
     private context: vscode.ExtensionContext;
 
     // Implement drag and drop
-    dropMimeTypes = ['application/vnd.code.tree.flaggedFiles'];
+    dropMimeTypes = ['application/vnd.code.tree.flaggedFiles', 'text/uri-list'];
     dragMimeTypes = ['application/vnd.code.tree.flaggedFiles'];
 
     constructor(context: vscode.ExtensionContext) {
@@ -96,11 +96,6 @@ class FlaggedFilesProvider
         target: FlaggedFileItem | FlagFolderItem | undefined,
         sources: vscode.DataTransfer,
     ): Promise<void> {
-        const transferredItems = sources.get('application/vnd.code.tree.flaggedFiles')?.value;
-        if (!transferredItems?.length) {
-            return;
-        }
-
         // Determine target folder ID based on what we dropped onto
         let targetParentId: string | null = null;
         if (target instanceof FlagFolderItem) {
@@ -113,22 +108,71 @@ class FlaggedFilesProvider
             }
         }
 
-        for (const item of transferredItems) {
-            if (item.type === 'file') {
-                const file = this.flaggedFiles.get(item.uri);
-                if (file) {
-                    file.parentId = targetParentId;
-                }
-            } else if (item.type === 'folder') {
-                const folder = this.folders.get(item.id);
-                if (folder && !this.wouldCreateCycle(folder.id, targetParentId)) {
-                    folder.parentId = targetParentId;
+        // First try handling drops from our own tree (internal drag and drop)
+        const transferredItems = sources.get('application/vnd.code.tree.flaggedFiles')?.value;
+        if (transferredItems?.length) {
+            for (const item of transferredItems) {
+                if (item.type === 'file') {
+                    const file = this.flaggedFiles.get(item.uri);
+                    if (file) {
+                        file.parentId = targetParentId;
+                    }
+                } else if (item.type === 'folder') {
+                    const folder = this.folders.get(item.id);
+                    if (folder && !this.wouldCreateCycle(folder.id, targetParentId)) {
+                        folder.parentId = targetParentId;
+                    }
                 }
             }
+
+            this.saveState();
+            this.refresh();
+            return;
         }
 
-        this.saveState();
-        this.refresh();
+        // Handle drops from editor tabs (will be in text/uri-list format)
+        const uriList = sources.get('text/uri-list')?.value;
+        if (uriList) {
+            // text/uri-list format is URI per line, potentially with comments prefixed with #
+            const uris = uriList
+                .split('\n')
+                .map((line: string) => line.trim())
+                .filter((line: string) => line && !line.startsWith('#'))
+                .map((uri: string) => {
+                    try {
+                        return vscode.Uri.parse(uri);
+                    } catch {
+                        return null;
+                    }
+                })
+                .filter((uri: unknown): uri is vscode.Uri => uri !== null);
+
+            if (uris.length > 0) {
+                for (const uri of uris) {
+                    // Check if file is already flagged
+                    const existingFlag = this.flaggedFiles.get(uri.toString());
+                    if (existingFlag) {
+                        // If already flagged, just move it to the target folder
+                        existingFlag.parentId = targetParentId;
+                    } else {
+                        // Otherwise, prompt for a comment and flag it
+                        const comment = await vscode.window.showInputBox({
+                            placeHolder: 'Add a comment (optional)',
+                            prompt: `Add an optional comment for ${path.basename(uri.fsPath)}`,
+                        });
+                        this.flaggedFiles.set(uri.toString(), {
+                            uri,
+                            comment: comment || '',
+                            parentId: targetParentId,
+                        });
+                    }
+                }
+
+                this.saveState();
+                this.refresh();
+                vscode.window.showInformationMessage(`File${uris.length > 1 ? 's' : ''} flagged successfully`);
+            }
+        }
     }
 
     async handleDrag(
