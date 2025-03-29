@@ -102,12 +102,12 @@
                 {
                     "command": "flag-it.renameFolder",
                     "when": "view == flaggedFiles && viewItem == flagFolder",
-                    "group": "inline"
+                    "group": "inline@1"
                 },
                 {
                     "command": "flag-it.deleteFolder",
                     "when": "view == flaggedFiles && viewItem == flagFolder",
-                    "group": "inline"
+                    "group": "inline@2"
                 },
                 {
                     "command": "flag-it.renameFolder",

@@ -5,6 +5,7 @@
 - Update images to use the default VSCode icon images
 - Add support to drag editor tabs into the flag it view
 - Use the icon theme for any flagged file
+- Fix order of icons on hover being different on folders vs flagged files
 
 ## 0.1.0
 
