@@ -1,5 +1,5 @@
 /**
- * @see https://prettier.io/docs/en/configuration.html
+ * @see https://prettier.io/docs/configuration
  * @type {import("prettier").Config}
  */
 const config = {
@@ -10,7 +10,7 @@ const config = {
     jsxBracketSameLine: false,
     overrides: [
         {
-            files: ['*.ya?ml', '*.tf'],
+            files: ['*.yaml', '*.yml'],
             options: {
                 endOfLine: 'auto',
                 tabWidth: 2,
