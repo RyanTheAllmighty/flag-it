@@ -400,10 +400,7 @@ class FlaggedFileItem extends vscode.TreeItem {
     }
 }
 
-// This method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext) {
-    console.log('Congratulations, your extension "flag-it" is now active!');
-
     // Update the context when files are flagged/unflagged
     context.subscriptions.push(
         vscode.commands.registerCommand('flag-it.updateContext', () => {
