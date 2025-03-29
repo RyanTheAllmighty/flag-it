@@ -2,7 +2,7 @@
     "name": "flag-it",
     "displayName": "Flag It",
     "description": "A VSCode extension to flag/bookmark files with comments for easy access",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "engines": {
         "vscode": "^1.56.0",
         "node": ">=20",
@@ -145,6 +145,7 @@
                     "id": "flaggedFiles",
                     "name": "Flagged Files",
                     "type": "tree",
+                    "icon": "$(folder)",
                     "order": 1
                 }
             ]

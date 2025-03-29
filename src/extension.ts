@@ -381,13 +381,12 @@ class FlaggedFileItem extends vscode.TreeItem {
             arguments: [this.uri],
         };
 
-        // Set icon and context value
-        this.iconPath = new vscode.ThemeIcon('flag');
+        // Set the resourceUri to use the file's icon from the current theme
+        this.resourceUri = uri;
         this.contextValue = 'flaggedFile';
 
         // Check if file is in workspace and apply different styling if it's not
         if (!this.isFileInWorkspace(uri)) {
-            this.resourceUri = uri; // This enables the "dimmed" appearance
             this.description = `${this.description} (External)`;
             this.tooltip = `${this.tooltip}\n(File is outside workspace)`;
         }
